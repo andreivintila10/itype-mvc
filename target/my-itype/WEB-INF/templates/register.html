@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Register | iType</title>
+
+        <link rel="apple-touch-icon" sizes="180x180" th:href="@{/images/favicons/apple-touch-icon.png}">
+        <link rel="icon" type="image/png" sizes="32x32" th:href="@{/images/favicons/favicon-32x32.png}">
+        <link rel="icon" type="image/png" sizes="16x16" th:href="@{/images/favicons/favicon-16x16.png}">
+        <link rel="manifest" th:href="@{/images/favicons/site.webmanifest}">
+		
+		<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+		<link th:href="@{/css/style.css}" rel="stylesheet" />
+	</head>
+
+	<body id="register-body">
+        <div id="btn-close-auth">
+	        <a href="javascript:history.back()">
+	            <svg id="svg-close" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+	                <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"/>
+	            </svg>
+	        </a>
+	    </div>
+
+        <div class="card-body card-body-auth">
+            <h5 class="card-title text-center">Register</h5>
+	        <form th:action="@{/register}" th:object="${registerForm}" method="post" autocomplete="off" novalidate>
+                <div th:class="${loginAlert} + ' hide'" role="alert" th:text="${loginError}"></div>
+		        <div class="mb-3">
+	                <label for="inputName" class="form-label">Full name</label>
+				    <input type="text" th:field="*{name}" th:class="'form-control ' + ${nameValidation}" name="inputName" id="inputName" autocomplete="off" required />
+				    <div class="invalid-feedback">
+                        Field cannot be empty.
+                    </div>
+				</div>
+				<div class="mb-3">
+	                <label for="inputEmail" class="form-label">Email address</label>
+	                <input type="email" th:field="*{email}" th:class="'form-control ' + ${emailValidation}" name="inputEmail" id="inputEmail" autocomplete="off" required />
+	                <div class="invalid-feedback">
+                        Field cannot be empty.
+                    </div>
+	            </div>
+	            <div class="mb-3">
+	                <label for="inputUsername" class="form-label">Username</label>
+	                <input type="text" th:field="*{username}" th:class="'form-control ' + ${usernameValidation}" name="inputUsername" id="inputUsername" autocomplete="off" required />
+	                <div class="invalid-feedback">
+                        Field cannot be empty.
+                    </div>
+	            </div>
+	            <div class="mb-3">
+	                <label for="inputPassword" class="form-label">Password</label>
+	                <input type="password" th:field="*{password}" th:class="'form-control ' + ${passwordValidation}" name="inputPassword" id="inputPassword" autocomplete="off" required />
+	                <div class="invalid-feedback">
+                        Field cannot be empty.
+                    </div>
+	            </div>
+	            <button type="submit" name="submit" class="btn btn-primary">Register</button>
+	        </form>
+        </div>
+	</body>
+</html>
