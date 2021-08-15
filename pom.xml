@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.springmvc</groupId>
-	<artifactId>my-itype</artifactId>
+	<artifactId>itype-mvc</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>my-itype Maven Webapp</name>
-	<url>http://localhost:9000/my-itype//</url>
+	<name>itype-mvc Maven Webapp</name>
+	<url>http://localhost:9000/itype-mvc/</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -96,7 +96,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>my-itype</finalName>
+		<finalName>itype-mvc</finalName>
 		<pluginManagement>
 			<plugins>
                 <plugin>
