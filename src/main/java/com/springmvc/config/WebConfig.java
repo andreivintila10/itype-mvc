@@ -22,8 +22,8 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
 	private ApplicationContext applicationContext;
 
 	public void setApplicationContext(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
-    }
+		this.applicationContext = applicationContext;
+	}
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -37,31 +37,32 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
 	public SpringResourceTemplateResolver templateResolver() {
 		SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
 		templateResolver.setApplicationContext(applicationContext);
-	    templateResolver.setPrefix("/WEB-INF/templates/");
-	    templateResolver.setSuffix(".html");
-	    templateResolver.setTemplateMode(TemplateMode.HTML);
+		templateResolver.setPrefix("/WEB-INF/templates/");
+		templateResolver.setSuffix(".html");
+		templateResolver.setTemplateMode(TemplateMode.HTML);
 
-	    return templateResolver;
+		return templateResolver;
 	}
-	
+
 	@Bean
 	@Description("Thymeleaf Template Engine")
 	public SpringTemplateEngine templateEngine() {
-	    SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-	    templateEngine.setEnableSpringELCompiler(true);
-	    templateEngine.setTemplateResolver(templateResolver());
+		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+		templateEngine.setEnableSpringELCompiler(true);
+		templateEngine.setTemplateResolver(templateResolver());
 
-	    return templateEngine;
+		return templateEngine;
 	}
 
 	@Bean
 	@Description("Thymeleaf View Resolver")
 	public ThymeleafViewResolver viewResolver() {
-	    ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-	    viewResolver.setTemplateEngine(templateEngine());
-	    viewResolver.setCharacterEncoding("UTF-8");
-	    viewResolver.setOrder(1);
+		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+		viewResolver.setTemplateEngine(templateEngine());
+		viewResolver.setCharacterEncoding("UTF-8");
+		viewResolver.setOrder(1);
 
-	    return viewResolver;
+		return viewResolver;
 	}
+
 }

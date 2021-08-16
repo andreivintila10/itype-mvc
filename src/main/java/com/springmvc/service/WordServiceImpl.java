@@ -15,7 +15,7 @@ import com.springmvc.repository.WordRepository;
 public class WordServiceImpl implements WordService {
 
 	@Autowired
-    private WordRepository wordRepository;
+	private WordRepository wordRepository;
 
 	@Override
 	@Transactional
@@ -62,4 +62,5 @@ public class WordServiceImpl implements WordService {
 		wordRepository.deleteAll();
 
 	}
+
 }

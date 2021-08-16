@@ -39,19 +39,19 @@ public class WordController {
 		try {
 			System.out.println(new File(servletContext.getRealPath("/resources/files/words.txt")).getAbsolutePath());
 			scanner = new Scanner(new File(servletContext.getRealPath("/resources/files/words.txt")));
-	        wordService.deleteWords();
+			wordService.deleteWords();
 
-	        Word word;
+			Word word;
 			List<Word> words = new ArrayList<Word>();
-	        while (scanner.hasNext()) {
-		    	word = new Word((String) scanner.next());
-		    	words.add(word);
-		    }
+			while (scanner.hasNext()) {
+				word = new Word((String) scanner.next());
+				words.add(word);
+			}
 
-	        wordService.saveWords(words);
-	    } catch (FileNotFoundException e) {
-	        e.printStackTrace();  
-	    }
+			wordService.saveWords(words);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@GetMapping("/delete-words")
@@ -83,4 +83,5 @@ public class WordController {
 
 		return "practice";
 	}
+
 }

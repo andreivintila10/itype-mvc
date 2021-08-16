@@ -2,239 +2,239 @@
 
 $(document).ready(function() {
 
-    // Elements
-    var keyboard, clock;
-    var wordScreen, wordsList, letters;
-    var buttonStart, buttonReset, buttonRestart;
-    var wpmEl, characterEl, myForm;
+	// Elements
+	var keyboard, clock;
+	var wordScreen, wordsList, letters;
+	var buttonStart, buttonReset, buttonRestart;
+	var wpmEl, characterEl, myForm;
 
-    // Global variables
-    var isRunning, isShowingResults;
-    var minutes, seconds;
-    var words;
-    var current, position, noOfWords;
-    var wpm;
+	// Global variables
+	var isRunning, isShowingResults;
+	var minutes, seconds;
+	var words;
+	var current, position, noOfWords;
+	var wpm;
 
-    function initElements() {
-        keyboard = document.getElementById("keyboard");
-        clock = document.getElementById("timer");
-        wordScreen = document.getElementById("current-word");
-        wordsList = document.getElementsByClassName("word");
-        buttonStart = document.getElementById("btn-start");
-        buttonReset = document.getElementById("btn-reset");
-        buttonRestart = document.getElementById("btn-restart");
-        controlButtons = document.getElementsByClassName("btn-type-control");
+	function initElements() {
+		keyboard = document.getElementById("keyboard");
+		clock = document.getElementById("timer");
+		wordScreen = document.getElementById("current-word");
+		wordsList = document.getElementsByClassName("word");
+		buttonStart = document.getElementById("btn-start");
+		buttonReset = document.getElementById("btn-reset");
+		buttonRestart = document.getElementById("btn-restart");
+		controlButtons = document.getElementsByClassName("btn-type-control");
 
-        wpmEl = document.getElementById("wpmField");
-        characterEl = document.getElementById("lastCharacterField");
-        myForm = document.getElementById("typeSessionForm");
-    }
+		wpmEl = document.getElementById("wpmField");
+		characterEl = document.getElementById("lastCharacterField");
+		myForm = document.getElementById("typeSessionForm");
+	}
 
-    function initGlobalVariables() {
-        isRunning = false;
-        minutes = 1;
-        seconds = 0;
-        words = new Array();
-        noOfWords = words.length;
-        position = 0;
-        current = 0;
-        wpm = 0;
+	function initGlobalVariables() {
+		isRunning = false;
+		minutes = 1;
+		seconds = 0;
+		words = new Array();
+		noOfWords = words.length;
+		position = 0;
+		current = 0;
+		wpm = 0;
 
-        isShowingResults();
-    }
+		isShowingResults();
+	}
 
-    function init() {
-        initElements();
-        initGlobalVariables();
-    }
+	function init() {
+		initElements();
+		initGlobalVariables();
+	}
 
-    init();
+	init();
 
-    // Events
-    document.addEventListener('keydown', run, false);
-    buttonStart.addEventListener('click', startButtonClick, false);
+	// Events
+	document.addEventListener('keydown', run, false);
+	buttonStart.addEventListener('click', startButtonClick, false);
 
-    function startButtonClick() {
-        if (!isRunning)
-            start();
-    }
+	function startButtonClick() {
+		if (!isRunning)
+			start();
+	}
 
-    function showButton(button) {
-        for (let index = 0; index < controlButtons.length; index++)
-            controlButtons[index].style.display = "none";
-        button.style.display = "inline-block";
-    }
+	function showButton(button) {
+		for (let index = 0; index < controlButtons.length; index++)
+			controlButtons[index].style.display = "none";
+		button.style.display = "inline-block";
+	}
 
-    function start() {
-        if (isShowingResults)
-            return false;
+	function start() {
+		if (isShowingResults)
+			return false;
 
-        getWords();
+		getWords();
 
-        isRunning = true;
-        timer = setInterval(myTimer, 1000);
-        displayWord(words[current]);
-        updateVirtualKeyboard(words[current][position]);
+		isRunning = true;
+		timer = setInterval(myTimer, 1000);
+		displayWord(words[current]);
+		updateVirtualKeyboard(words[current][position]);
 
-        showButton(buttonReset);
-        
-        return true;
-    }
+		showButton(buttonReset);
 
-    function end() {
-        clearInterval(timer);
-        wpm = wpm + position;
-        if (wpm > 0)
-            wpm /= 5.0;
-        isRunning = false;
+		return true;
+	}
 
-        console.log("Words per minute: " + wpm);
-        wordScreen.innerHTML = wpm + " WPM";
-        wordScreen.style.color = "green";
+	function end() {
+		clearInterval(timer);
+		wpm = wpm + position;
+		if (wpm > 0)
+			wpm /= 5.0;
+		isRunning = false;
 
-        document.removeEventListener('keydown', run, false);
-        buttonStart.removeEventListener('click', startButtonClick, false);
+		console.log("Words per minute: " + wpm);
+		wordScreen.innerHTML = wpm + " WPM";
+		wordScreen.style.color = "green";
 
-        showButton(buttonRestart);
+		document.removeEventListener('keydown', run, false);
+		buttonStart.removeEventListener('click', startButtonClick, false);
 
-        wpmEl.value = wpm;
-        characterEl.value = keyboard.src;
-        myForm.submit();
-    }
+		showButton(buttonRestart);
 
-    function getWords() {
-        for (let index = 0; index < wordsList.length; index++)
-            words.push(wordsList[index].innerHTML);
-    }
+		wpmEl.value = wpm;
+		characterEl.value = keyboard.src;
+		myForm.submit();
+	}
 
-    function updateLetterColor(position, color) {
-        letters[position].style.color = color;
-    }
+	function getWords() {
+		for (let index = 0; index < wordsList.length; index++)
+			words.push(wordsList[index].innerHTML);
+	}
 
-    function getLetterColor(position) {
-        return letters[position].style.color;
-    }
+	function updateLetterColor(position, color) {
+		letters[position].style.color = color;
+	}
 
-    function displayWord(word) {
-        wordScreen.innerHTML = "";
+	function getLetterColor(position) {
+		return letters[position].style.color;
+	}
 
-        let letter;
-        for (let index = 0; index < word.length; index++) {
-            letter = document.createElement("div");
-            letter.innerHTML = word[index];
-            letter.classList.add("letter");
-            wordScreen.appendChild(letter);
-        }
+	function displayWord(word) {
+		wordScreen.innerHTML = "";
 
-        letters = document.getElementsByClassName("letter");
-    }
+		let letter;
+		for (let index = 0; index < word.length; index++) {
+			letter = document.createElement("div");
+			letter.innerHTML = word[index];
+			letter.classList.add("letter");
+			wordScreen.appendChild(letter);
+		}
 
-    function isValidWord() {
-        for (let index = 0; index < position; index++)
-            if (getLetterColor(index) === 'red')
-                return false;
+		letters = document.getElementsByClassName("letter");
+	}
 
-        return true;
-    }
+	function isValidWord() {
+		for (let index = 0; index < position; index++)
+			if (getLetterColor(index) === 'red')
+				return false;
 
-    function run(e) {
-        var x = e.which || e.keyCode;
-        var y = String.fromCharCode(x);
+		return true;
+	}
 
-        if (isRunning) {
-            e.preventDefault();
+	function run(e) {
+		var x = e.which || e.keyCode;
+		var y = String.fromCharCode(x);
 
-            if (x === 8 && position > 0) {
-                position--;
+		if (isRunning) {
+			e.preventDefault();
 
-                if (isValidWord())
-                    updateVirtualKeyboard(words[current][position]);
+			if (x === 8 && position > 0) {
+				position--;
 
-                updateLetterColor(position, "black");
-            }
-            else if (x === 32 && position === words[current].length) {
-                if (isValidWord()) {
-                    // Wpm is the size of the word + 1 for the space key press.
-                    wpm += words[current].length + 1;
-                    current++;
-                    // Less likely however, theoretically possible.
-                    if (current === noOfWords) {
-                        end();
-                    }
-                    else {
-                        position = 0;
-                        displayWord(words[current]);
-                    }
+				if (isValidWord())
+					updateVirtualKeyboard(words[current][position]);
 
-                    updateVirtualKeyboard(words[current][position]);
-                }
-            }
-            else if (x >= 32 && x <= 126 && position < words[current].length) {
-                if (y.toLowerCase() === words[current][position]) {
-                    updateLetterColor(position, "#00cc00");
-                }
-                else {
-                    updateLetterColor(position, "red");
-                    updateVirtualKeyboard("BACKSPACE");
-                }
-                position++;
+				updateLetterColor(position, "black");
+			}
+			else if (x === 32 && position === words[current].length) {
+				if (isValidWord()) {
+					// Wpm is the size of the word + 1 for the space key press.
+					wpm += words[current].length + 1;
+					current++;
+					// Less likely however, theoretically possible.
+					if (current === noOfWords) {
+						end();
+					}
+					else {
+						position = 0;
+						displayWord(words[current]);
+					}
 
-                if (isValidWord()) {
-                    if (position < words[current].length)
-                        updateVirtualKeyboard(words[current][position]);
-                    else
-                        updateVirtualKeyboard("SPACE");
-                }
-            }
-        }
-        else if (x === 13) {
-            start();
-        }
-    }
+					updateVirtualKeyboard(words[current][position]);
+				}
+			}
+			else if (x >= 32 && x <= 126 && position < words[current].length) {
+				if (y.toLowerCase() === words[current][position]) {
+					updateLetterColor(position, "#00cc00");
+				}
+				else {
+					updateLetterColor(position, "red");
+					updateVirtualKeyboard("BACKSPACE");
+				}
+				position++;
 
-    function updateVirtualKeyboard(key) {
-        keyboard.src = "/my-itype/images/keyboard/keyboard" + key.toUpperCase() + ".png";
-    }
+				if (isValidWord()) {
+					if (position < words[current].length)
+						updateVirtualKeyboard(words[current][position]);
+					else
+						updateVirtualKeyboard("SPACE");
+				}
+			}
+		}
+		else if (x === 13) {
+			start();
+		}
+	}
 
-    // Timer logic
-    function twoDigits(number) {
-        if (number <= 9)
-            return "0" + number;
+	function updateVirtualKeyboard(key) {
+		keyboard.src = "/my-itype/images/keyboard/keyboard" + key.toUpperCase() + ".png";
+	}
 
-        return number;
-    }
+	// Timer logic
+	function twoDigits(number) {
+		if (number <= 9)
+			return "0" + number;
 
-    function setTime(minutes, seconds) {
-        clock.innerHTML = twoDigits(minutes) + ':' + twoDigits(seconds);
-    }
+		return number;
+	}
 
-    function myTimer() {
-        if (seconds > 0) {
-            seconds--;
-            setTime(minutes, seconds);
-        }
-        else if (minutes > 0) {
-            minutes--;
-            seconds = 59;
-            setTime(minutes, seconds);
-        }
-        else {
-            end();
-        }
-    }
+	function setTime(minutes, seconds) {
+		clock.innerHTML = twoDigits(minutes) + ':' + twoDigits(seconds);
+	}
 
-    function isShowingResults() {
-        let wpmString = wpmEl.value;
-        if (wpmString !== "") {
-            wpm = parseInt(wpmString);
-            isShowingResults = true;
-            showButton(buttonRestart);
-            keyboard.src = "/my-itype/images/keyboard/keyboard.png";
-            setTime(0, 0);
-            wordScreen.innerHTML = wpmString + " WPM";
-            wordScreen.style.color = "green";
-        }
-        else
-            isShowingResults = false;
-    }
+	function myTimer() {
+		if (seconds > 0) {
+			seconds--;
+			setTime(minutes, seconds);
+		}
+		else if (minutes > 0) {
+			minutes--;
+			seconds = 59;
+			setTime(minutes, seconds);
+		}
+		else {
+			end();
+		}
+	}
+
+	function isShowingResults() {
+		let wpmString = wpmEl.value;
+		if (wpmString !== "") {
+			wpm = parseInt(wpmString);
+			isShowingResults = true;
+			showButton(buttonRestart);
+			keyboard.src = "/my-itype/images/keyboard/keyboard.png";
+			setTime(0, 0);
+			wordScreen.innerHTML = wpmString + " WPM";
+			wordScreen.style.color = "green";
+		}
+		else
+			isShowingResults = false;
+	}
 });

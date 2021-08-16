@@ -12,54 +12,55 @@ import com.springmvc.repository.UserRepository;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-    @Override
-    @Transactional
-    public List<User> getUsers() {
-        return userRepository.findAll();
-
-    }
-
-    @Override
-    @Transactional
-    public void saveUser(User user) {
-        userRepository.save(user);
-
-    }
-
-    @Override
-    @Transactional
-    public User getUser(long id) {
-        return userRepository.findById(id).orElse(null);
-
-    }
-
-    @Override
-    @Transactional
-	public User getUserByUsername(String username) {
-    	return userRepository.findByUsername(username);
+	@Override
+	@Transactional
+	public List<User> getUsers() {
+		return userRepository.findAll();
 
 	}
 
-    @Override
-    @Transactional
-    public User validateUser(User user) {
-    	return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+	@Override
+	@Transactional
+	public void saveUser(User user) {
+		userRepository.save(user);
 
-    }
+	}
 
-    @Override
+	@Override
+	@Transactional
+	public User getUser(long id) {
+		return userRepository.findById(id).orElse(null);
+
+	}
+
+	@Override
+	@Transactional
+	public User getUserByUsername(String username) {
+		return userRepository.findByUsername(username);
+
+	}
+
+	@Override
+	@Transactional
+	public User validateUser(User user) {
+		return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+
+	}
+
+	@Override
 	public void updateUser(User user1, User user2) {
 		// TODO Auto-generated method stub
 
 	}
 
-    @Override
-    @Transactional
-    public void deleteUser(long id) {
-        userRepository.deleteById(id);
+	@Override
+	@Transactional
+	public void deleteUser(long id) {
+		userRepository.deleteById(id);
 
-    }
+	}
+
 }

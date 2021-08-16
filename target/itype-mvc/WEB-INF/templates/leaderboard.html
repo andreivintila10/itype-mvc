@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Leaderboard | iType</title>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Leaderboard | iType</title>
 
-        <link rel="apple-touch-icon" sizes="180x180" th:href="@{/images/favicons/apple-touch-icon.png}">
-        <link rel="icon" type="image/png" sizes="32x32" th:href="@{/images/favicons/favicon-32x32.png}">
-        <link rel="icon" type="image/png" sizes="16x16" th:href="@{/images/favicons/favicon-16x16.png}">
-        <link rel="manifest" th:href="@{/images/favicons/site.webmanifest}">
+		<link rel="apple-touch-icon" sizes="180x180" th:href="@{/images/favicons/apple-touch-icon.png}">
+		<link rel="icon" type="image/png" sizes="32x32" th:href="@{/images/favicons/favicon-32x32.png}">
+		<link rel="icon" type="image/png" sizes="16x16" th:href="@{/images/favicons/favicon-16x16.png}">
+		<link rel="manifest" th:href="@{/images/favicons/site.webmanifest}">
 
-        <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
-        <link th:href="@{/css/style.css}" rel="stylesheet" />
-    </head>
+		<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+		<link th:href="@{/css/style.css}" rel="stylesheet" />
+	</head>
 
-    <body>
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 border-bottom">
-            <a th:href="@{/}" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-                <span id="logo"><img id="itype-icon" th:src="@{/images/itype-icon.png}" alt="itype icon - computer" />iType</span>
-            </a>
+	<body>
+		<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 border-bottom">
+			<a th:href="@{/}" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+				<span id="logo"><img id="itype-icon" th:src="@{/images/itype-icon.png}" alt="itype icon - computer" />iType</span>
+			</a>
 
-            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a th:href="@{/}" class="nav-link px-2 link-dark">Home</a></li>
-                <li><a th:href="@{/practice}" class="nav-link px-2 link-dark">Practice</a></li>
-                <li><a th:href="@{/leaderboard}" class="nav-link px-2 link-secondary">Leaderboard</a></li>
-                <li><a th:href="@{/features}" class="nav-link px-2 link-dark">Features</a></li>
-                <li><a th:href="@{/about}" class="nav-link px-2 link-dark">About</a></li>
-            </ul>
+			<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+				<li><a th:href="@{/}" class="nav-link px-2 link-dark">Home</a></li>
+				<li><a th:href="@{/practice}" class="nav-link px-2 link-dark">Practice</a></li>
+				<li><a th:href="@{/leaderboard}" class="nav-link px-2 link-secondary">Leaderboard</a></li>
+				<li><a th:href="@{/features}" class="nav-link px-2 link-dark">Features</a></li>
+				<li><a th:href="@{/about}" class="nav-link px-2 link-dark">About</a></li>
+			</ul>
 
-            <div class="col-md-3 text-end">
-                <a class="not-logged-in" th:href="@{/login}">
-                    <button type="button" class="btn btn-outline-primary me-2">Login</button>
-                </a>
-                <a class="not-logged-in" th:href="@{/register}">
-                    <button type="button" class="btn btn-primary">Sign-up</button>
-                </a>
-                <a class="logged-in" th:href="@{/profile}">
-                    <img id="nav-profile-picture" th:src="@{/images/default-profile-picture.jpg}" alt="your profile picture" />
-                    <span id="username-container">
-                        <span id="username" th:text="${session.name} ?: ''"></span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
-                        </svg>
-                    </span>
-                </a>
-            </div>
-        </header>
+			<div class="col-md-3 text-end">
+				<a class="not-logged-in" th:href="@{/login}">
+					<button type="button" class="btn btn-outline-primary me-2">Login</button>
+				</a>
+				<a class="not-logged-in" th:href="@{/register}">
+					<button type="button" class="btn btn-primary">Sign-up</button>
+				</a>
+				<a class="logged-in" th:href="@{/profile}">
+					<img id="nav-profile-picture" th:src="@{/images/default-profile-picture.jpg}" alt="your profile picture" />
+					<span id="username-container">
+						<span id="username" th:text="${session.name} ?: ''"></span>
+						<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+							<path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+						</svg>
+					</span>
+				</a>
+			</div>
+		</header>
 
-        <div id="in-construction-msg">LEADERBOARD</div>
+		<div id="in-construction-msg">LEADERBOARD</div>
 
-        <div id="is-logged-in" th:text="${session.isLoggedIn}"></div>
+		<div id="is-logged-in" th:text="${session.isLoggedIn}"></div>
 
-        <script type="text/javascript" th:src="@{/js/myscript.js}"></script>
-    </body>
+		<script type="text/javascript" th:src="@{/js/myscript.js}"></script>
+	</body>
 </html>
