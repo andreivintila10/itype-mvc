@@ -1,6 +1,6 @@
-# itype-mvc | Platform for learning touch typing in Spring MVC
+# iType-mvc | Platform for learning touch typing in Spring MVC
 
-Took my 1st year team project iType and rewrote it following the Spring MVC architecture.
+Took my first year team project iType and rewrote it following the Spring MVC architecture.
 
 The best typing skills come with touch-typing, or the ability to type without looking at the keyboard.
 
